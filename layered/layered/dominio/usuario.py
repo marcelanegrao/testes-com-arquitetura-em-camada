@@ -38,6 +38,7 @@ class Usuario:
     
     nome: str
     email: str
+    telefone: Optional[str] = None
     id: Optional[int] = None
     ativo: bool = True
     
@@ -46,8 +47,10 @@ class Usuario:
         Valida os dados após inicialização.
         Garante que invariantes sejam respeitadas.
         """
+        
         self._validar_nome(self.nome)
         self._validar_email(self.email)
+        self._validar_telefone(self.telefone)
     
     @staticmethod
     def _validar_nome(nome: str) -> None:
@@ -103,6 +106,27 @@ class Usuario:
         padrao_email = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
         if not re.match(padrao_email, email_limpo):
             raise UsuarioInvalidoError("Formato de email inválido")
+
+
+    @staticmethod
+    def _validar_telefone(telefone: Optional[str]) -> None:
+    
+        """
+        Valida o telefone do usuário.
+        """
+
+    # Campo opcional
+    if telefone is None:
+        return
+
+    # Remove caracteres que não são números
+    telefone_limpo = re.sub(r'\D', '', telefone)
+
+    # Verifica quantidade de dígitos
+    if len(telefone_limpo) < 10 or len(telefone_limpo) > 11:
+        raise UsuarioInvalidoError(
+            "Telefone deve ter 10 ou 11 dígitos"
+        )
     
     def atualizar_nome(self, novo_nome: str) -> None:
         """

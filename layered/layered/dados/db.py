@@ -84,7 +84,7 @@ def inicializar_banco() -> None:
                 ativo INTEGER NOT NULL DEFAULT 1,
                 criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
                 atualizado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            )
+)
             """
         )
         
