@@ -182,12 +182,17 @@ class RepositorioUsuario:
             cursor.execute(
                 """
                 UPDATE usuarios
-                SET nome = ?, email = ?, ativo = ?
+                SET nome = ?, email = ?, telefone = ?, ativo = ?
                 WHERE id = ?
                 """,
-                (usuario.nome, usuario.email, usuario.ativo, usuario.id)
+                (
+                    usuario.nome,
+                    usuario.email,
+                    usuario.telefone,
+                    usuario.ativo,
+                    usuario.id
+                )
             )
-            
             conexao.commit()
             
             return usuario
@@ -238,10 +243,10 @@ class RepositorioUsuario:
     def _converter_linha_para_usuario(linha: tuple) -> Usuario:
         """
         Converte uma linha do banco de dados em entidade Usuario.
-        
+
         Args:
             linha: Tupla com dados do banco (id, nome, email, ativo)
-        usuario_id, nome, email, telefone, ativo = linha
+
         Returns:
             Usuario: Entidade de domínio
         """
