@@ -32,7 +32,7 @@ Instalar dependências:
 pip install flask
 
 Executar aplicação:
-python app.py
+python app.py ou python3 app.py
 
 ## Resultado
 A aplicação foi executada com sucesso e as alterações foram implementadas corretamente em todas as camadas da arquitetura.
