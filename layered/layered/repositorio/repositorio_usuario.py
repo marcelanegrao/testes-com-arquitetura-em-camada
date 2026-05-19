@@ -45,10 +45,13 @@ class RepositorioUsuario:
             # Executar INSERT
             cursor.execute(
                 """
-                INSERT INTO usuarios (nome, email, ativo)
-                VALUES (?, ?, ?)
+                INSERT INTO usuarios (nome, email, telefone, ativo)
+                VALUES (?, ?, ?, ?)
                 """,
-                (usuario.nome, usuario.email, usuario.ativo)
+                (usuario.nome,
+                usuario.email,
+                usuario.telefone,
+                usuario.ativo)
             )
             
             # Obter ID gerado
@@ -83,7 +86,7 @@ class RepositorioUsuario:
         try:
             cursor.execute(
                 """
-                SELECT id, nome, email, ativo
+                SELECT id, nome, email, telefone, ativo
                 FROM usuarios
                 WHERE id = ?
                 """,
@@ -116,7 +119,7 @@ class RepositorioUsuario:
         try:
             cursor.execute(
                 """
-                SELECT id, nome, email, ativo
+                SELECT id, nome, email, telefone, ativo
                 FROM usuarios
                 WHERE email = ?
                 """,
@@ -146,7 +149,7 @@ class RepositorioUsuario:
         try:
             cursor.execute(
                 """
-                SELECT id, nome, email, ativo
+                SELECT id, nome, email, telefone, ativo
                 FROM usuarios
                 ORDER BY nome
                 """
@@ -238,16 +241,17 @@ class RepositorioUsuario:
         
         Args:
             linha: Tupla com dados do banco (id, nome, email, ativo)
-        
+        usuario_id, nome, email, telefone, ativo = linha
         Returns:
             Usuario: Entidade de domínio
         """
-        usuario_id, nome, email, ativo = linha
+        usuario_id, nome, email, telefone, ativo = linha
         
         # Criar entidade de domínio
         usuario = Usuario(
             nome=nome,
             email=email,
+            telefone=telefone,
             ativo=bool(ativo)
         )
         usuario.id = usuario_id

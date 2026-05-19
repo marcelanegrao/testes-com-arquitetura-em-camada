@@ -26,7 +26,12 @@ class ServicoUsuario:
         """Inicializa o serviço com suas dependências."""
         self.repositorio = RepositorioUsuario()
     
-    def criar_usuario(self, nome: str, email: str) -> Usuario:
+    def criar_usuario(
+    self,
+    nome: str,
+    email: str,
+    telefone: str = None
+) -> Usuario:
         """
         Cria um novo usuário aplicando regras de negócio.
         
@@ -52,7 +57,11 @@ class ServicoUsuario:
             raise ValueError(f"Email '{email}' já está cadastrado no sistema")
         
         # Criar entidade de domínio (valida dados automaticamente)
-        usuario = Usuario(nome=nome, email=email)
+        usuario = Usuario(
+            nome=nome,
+            email=email,
+            telefone=telefone
+        )
         
         # Persistir no banco de dados
         usuario_salvo = self.repositorio.salvar(usuario)

@@ -110,23 +110,22 @@ class Usuario:
 
     @staticmethod
     def _validar_telefone(telefone: Optional[str]) -> None:
-    
         """
         Valida o telefone do usuário.
         """
 
-    # Campo opcional
-    if telefone is None:
-        return
+        # Campo opcional
+        if telefone is None:
+            return
 
-    # Remove caracteres que não são números
-    telefone_limpo = re.sub(r'\D', '', telefone)
+        # Remove caracteres que não são números
+        telefone_limpo = re.sub(r'\D', '', telefone)
 
-    # Verifica quantidade de dígitos
-    if len(telefone_limpo) < 10 or len(telefone_limpo) > 11:
-        raise UsuarioInvalidoError(
-            "Telefone deve ter 10 ou 11 dígitos"
-        )
+        # Verifica quantidade de dígitos
+        if len(telefone_limpo) < 10 or len(telefone_limpo) > 11:
+            raise UsuarioInvalidoError(
+                "Telefone deve ter 10 ou 11 dígitos"
+            )
     
     def atualizar_nome(self, novo_nome: str) -> None:
         """
